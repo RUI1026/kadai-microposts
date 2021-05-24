@@ -3,6 +3,10 @@
 @section('content')
     @if (Auth::check())
         {{ Auth::user()->name }}
+        <?php $string = App\User::all();
+        echo $string;
+        
+        ?>
     @else
         <div class="center jumbotron">
             <div class="text-center">

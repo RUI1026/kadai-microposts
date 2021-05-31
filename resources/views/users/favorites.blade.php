@@ -37,7 +37,7 @@
                             @if ($user->id != $favorite->user_id)
                                 {{-- お気に入り解除ボタンのフォーム --}}
                                 {!! Form::open(['route' => ['favorites.unfavorite', $favorite->pivot->micropost_id], 'method' => 'delete']) !!}
-                                    {!! Form::submit('Unfavorite', ['class' => "btn btn-primary btn-block"]) !!}
+                                    {!! Form::submit('Unfavorite', ['class' => "btn btn-warning btn-block"]) !!}
                                 {!! Form::close() !!}
                             @else
                                 {{-- 削除ボタンのフォーム --}}

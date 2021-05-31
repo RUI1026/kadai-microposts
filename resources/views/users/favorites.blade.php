@@ -33,21 +33,28 @@
                                 <p class="mb-0">{!! nl2br(e($favorite->content)) !!}</p>
                             </div>
                         </div>
-                        @if (Auth::id() == $user->id)
-                            @if ($user->id != $favorite->user_id)
-                                {{-- お気に入り解除ボタンのフォーム --}}
-                                {!! Form::open(['route' => ['favorites.unfavorite', $favorite->pivot->micropost_id], 'method' => 'delete']) !!}
-                                    {!! Form::submit('Unfavorite', ['class' => "btn btn-warning btn-block"]) !!}
-                                {!! Form::close() !!}
-                            @else
-                                {{-- 削除ボタンのフォーム --}}
-                                {!! Form::open(['route' => ['microposts.destroy', $favorite->pivot->micropost_id], 'method' => 'delete']) !!}
-                                    {!! Form::submit('delete', ['class' => "btn btn-danger btn-block"]) !!}
-                                {!! Form::close() !!}
-    
-                            @endif
-                        @endif
                     </li>
+                    <div class="d-flex">
+                        @if (Auth::id() == $user->id)
+                                @if ($user->id != $favorite->user_id)
+                                    {{-- お気に入り解除ボタンのフォーム --}}
+                                    {!! Form::open(['route' => ['favorites.unfavorite', $favorite->pivot->micropost_id], 'method' => 'delete']) !!}
+                                        {!! Form::submit('Unfavorite', ['class' => "btn btn-warning btn-sm"]) !!}
+                                    {!! Form::close() !!}
+                                @else
+                                    {{-- お気に入り解除ボタンのフォーム --}}
+                                    {!! Form::open(['route' => ['favorites.unfavorite', $favorite->pivot->micropost_id], 'method' => 'delete']) !!}
+                                        {!! Form::submit('Unfavorite', ['class' => "btn btn-warning btn-sm mr-2"]) !!}
+                                    {!! Form::close() !!}
+                                    {{-- 削除ボタンのフォーム --}}
+                                    {!! Form::open(['route' => ['microposts.destroy', $favorite->pivot->micropost_id], 'method' => 'delete']) !!}
+                                        {!! Form::submit('delete', ['class' => "btn btn-danger btn-sm"]) !!}
+                                    {!! Form::close() !!}
+        
+                                @endif
+                        @endif
+                    </div>
+                    <hr>
                     
                 @endforeach
                 {{-- ページネーションのリンク --}}

@@ -17,8 +17,10 @@
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             {{-- ユーザ詳細ページへのリンク --}}
-                            <li class="dropdown-item">{!! link_to_route('users.show', 'My profile', ['user' => Auth::id()]) !!}</li>
-                            <li class="dropdown-divider"></li>
+                            <a href="{{ route('users.show', ['user' => Auth::id()]) }}" class="dropdown-item {{ Request::routeIs('users.show') ? 'active text-white' : 'text-primary' }}">profile</a>
+                            {{-- お気に入りページへのリンク --}}
+                            <a href="{{ route('users.favorites', ['id' => $user->id]) }}" class="dropdown-item {{ Request::routeIs('users.favorites') ? 'active text-white' : 'text-primary' }}">favorites</a>
+
                             {{-- ログアウトへのリンク --}}
                             <li class="dropdown-item">{!! link_to_route('logout.get', 'Logout') !!}</li>
                         </ul>

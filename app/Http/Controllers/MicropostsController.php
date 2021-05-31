@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\FavoritesController;
+use Illuminate\Support\Facades\Auth;
+
 
 class MicropostsController extends Controller
 {
@@ -14,12 +18,17 @@ class MicropostsController extends Controller
             $user = \Auth::user();
             // ユーザとフォロー中ユーザの投稿の一覧を作成日時の降順で取得
             $microposts = $user->feed_microposts()->orderBy('created_at', 'desc')->paginate(10);
-
+            $favorite_microposts = $user->favorites()->paginate(10);
+            
             $data = [
                 'user' => $user,
                 'microposts' => $microposts,
+                'favorite_microposts' => $favorite_microposts,
             ];
         }
+        
+        
+        
 
         // Welcomeビューでそれらを表示
         return view('welcome', $data);
